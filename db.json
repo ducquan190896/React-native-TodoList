@@ -1,29 +1,14 @@
 {
   "todos": [
     {
-      "task": "hello",
-      "becomplete": false,
-      "id": 2
-    },
-    {
-      "task": "finnish todo list",
-      "becomplete": false,
-      "id": 4
-    },
-    {
-      "task": "finnish todo list",
-      "becomplete": false,
+      "task": "do springboot project",
+      "becomplete": true,
       "id": 5
     },
     {
-      "task": "finnish todo list",
+      "task": "hello morning",
       "becomplete": false,
       "id": 6
-    },
-    {
-      "task": "finnish todo list",
-      "becomplete": true,
-      "id": 7
     }
   ]
 }

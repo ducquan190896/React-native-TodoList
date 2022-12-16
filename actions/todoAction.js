@@ -53,7 +53,7 @@ export const addTask = (task) => async (dispatch, getState) => {
     }
 }
 
-export const updateTask = (id, task) => async (dispatch, getState) => {
+export const updateTaskFunction = (id, task) => async (dispatch, getState) => {
     try {
         const data = await fetch(`http://10.0.2.2:5000/todos/${id}`, {
             method: "PUT",
@@ -61,7 +61,7 @@ export const updateTask = (id, task) => async (dispatch, getState) => {
             body: JSON.stringify(task)
         })
         const datajson = await data.json()
-        dispatch({
+         dispatch({
             type: "update_task",
             payload: datajson
         })
@@ -73,20 +73,34 @@ export const updateTask = (id, task) => async (dispatch, getState) => {
     }
 }
 
+export const openUpdateStatus = (todo) => async (dispatch, getState) => {
+    try {
+        dispatch({
+            type: "open_update_status",
+            payload: todo
+        })
+    } catch (err) {
+        dispatch({
+            type: "error_task",
+            payload: err
+        })
+    }
+}
+
 export const deleteTask = (id) => async (dispatch, getState) => {
-    // try {
-    //      await fetch(`http://10.0.2.2:5000/todos/${id}`, {
-    //         method: "DELETE"
-    //     })
-    //     dispatch({
-    //         type:"delete_task",
-    //         payload: id
-    //     })
-    // } catch (err) {
-    //     dispatch({
-    //         type: "error_task",
-    //         payload: err
-    //     })
-    // }
+    try {
+         await fetch(`http://10.0.2.2:5000/todos/${id}`, {
+            method: "DELETE"
+        })
+        dispatch({
+            type:"delete_task",
+            payload: id
+        })
+    } catch (err) {
+        dispatch({
+            type: "error_task",
+            payload: err
+        })
+    }
     console.log(id)
 }

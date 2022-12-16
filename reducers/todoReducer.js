@@ -3,7 +3,9 @@ const initalState = {
     tasks: [],
     taskSuccess: false,
     taskError: false,
-    message: null
+    message: null,
+    updateStatus: false,
+    updateTask: null
 }
 
 export default (state = initalState, action) => {
@@ -23,14 +25,14 @@ export default (state = initalState, action) => {
                 taskError: false,
                 taskSuccess: true
             }
-        case "update_task":
-            return {
-                ...state,
-                taskSuccess: true,
-                taskError: false,
-                task: action.payload,
-                tasks: tasks.map(tas => tas.id == action.payload.id ? action.payload : tas)
-            }
+        // case "update_task":
+        //     return {
+        //         ...state,
+        //         taskSuccess: true,
+        //         taskError: false,
+        //         task: action.payload,
+        //         tasks: tasks.map(tas => tas.id == action.payload.id ? action.payload : tas)
+        //     }
         case "add_task":
             return {
                 ...state,
@@ -51,7 +53,23 @@ export default (state = initalState, action) => {
                 ...state,
                 taskSuccess: false,
                 taskError: true,
-                message: action.payload
+                message: action.payload,
+                updateTask:false
+            }
+        case "open_update_status":
+            return {
+                ...state,
+                updateStatus: true,
+                updateTask: action.payload
+            }
+        case "update_task":
+            return {
+                ...state,
+                tasks: state.tasks.map(tas => tas.id == action.payload.id ? action.payload : tas),
+                updateTask: null,
+                updateStatus: false,
+                task: null,
+                taskSuccess: false
             }
         default: 
         return state;
